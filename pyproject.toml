@@ -1,0 +1,26 @@
+[project]
+name = "thetool"
+version = "0.1.0"
+description = "A simple command-line testing tool that runs a Python program with multiple inputs and reports passes, errors, and timeouts."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.scripts]
+thetool = "thetool.cli:main"
+
+[dependency-groups]
+dev = [
+    "mypy",
+    "pytest",
+    "taskipy",
+]
+
+[tool.taskipy.tasks]
+test = "pytest"
+typecheck = "mypy src"
+all = "task test && task typecheck"
+
+[build-system]
+requires = ["uv_build>=0.12.7,<0.13"]
+build-backend = "uv_build"
