@@ -20,8 +20,8 @@ def main():
 
         try:
             result = subprocess.run(
-                ["python3", program, value],
-                timeout=2
+            [sys.executable, program, value],
+            timeout=2
             )
 
             if result.returncode == 0:
