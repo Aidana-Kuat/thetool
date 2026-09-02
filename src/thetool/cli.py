@@ -1,35 +1,35 @@
 import sys
 import subprocess
 
-# Get the Python file we want to test.
-program = sys.argv[1]
 
-# Get all the values that the user entered after the file name.
-values = sys.argv[2:]
+def main():
+    # Check that the user gave a program and at least one value.
+    if len(sys.argv) < 3:
+        print("Usage: thetool program.py value1 value2 ...")
+        return
 
-# Run the program once for each value.
-for value in values:
-    print(f'Input: "{value}"')
+    # Get the program we want to test.
+    program = sys.argv[1]
 
-    try:
-        # Run the target program with the current value.
-        # Stop it if it runs for more than 2 seconds.
-        result = subprocess.run(
-            ["python3", program, value],
-            timeout=2
-        )
+    # Get all the test values.
+    values = sys.argv[2:]
 
-        # If the program finishes normally, mark it as a pass.
-        if result.returncode == 0:
-            print("PASS")
+    # Run the program once for each value.
+    for value in values:
+        print(f'Input: "{value}"')
 
-        # If the program crashes or exits with an error, mark it as an error.
-        else:
-            print("ERROR")
+        try:
+            result = subprocess.run(
+                ["python3", program, value],
+                timeout=2
+            )
 
-    # If the program takes too long, mark it as a timeout.
-    except subprocess.TimeoutExpired:
-        print("TIMEOUT")
+            if result.returncode == 0:
+                print("PASS")
+            else:
+                print("ERROR")
 
-    # Add a blank line between test results.
-    print()
+        except subprocess.TimeoutExpired:
+            print("TIMEOUT")
+
+        print()
