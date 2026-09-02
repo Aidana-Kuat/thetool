@@ -9,4 +9,9 @@ def my_sqrt(x):
     return approx
 
 
-print(my_sqrt(4))
+def sqrt_program(arg: str) -> None:
+    x = int(arg)
+    print("The root of", x, "is", my_sqrt(x))
+
+
+sqrt_program("4")
