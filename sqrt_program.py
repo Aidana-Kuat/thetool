@@ -1,3 +1,6 @@
+import sys
+
+
 def my_sqrt(x):
     approx = None
     guess = x / 2
@@ -14,4 +17,4 @@ def sqrt_program(arg: str) -> None:
     print("The root of", x, "is", my_sqrt(x))
 
 
-sqrt_program("4")
+sqrt_program(sys.argv[1])
